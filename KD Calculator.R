@@ -43,3 +43,4 @@ IMRP_Data_Cleaned_Deaths <- IMRP_Data |>
  Merged <- merge(IMRP_Data_Cleaned_Deaths, IMRP_Data_Cleaned_Kills)
  
 write.csv(Merged,"C:/Users/harle/OneDrive/Desktop/IMRP 2024 Improved  War Census/Morgan vs Tattaglia Main War Files/last update/KD.csv")
+
