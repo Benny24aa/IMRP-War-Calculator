@@ -11,17 +11,18 @@ library(janitor)
 library(stringr)
 library(readr)
 
-Data_Location <-"C:/Users/harle/OneDrive/Desktop/IMRP 2024 Improved  War Census/Morgan vs Tattaglia Main War Files/last update/final with bradford data.xlsx" # data link
+Data_Location <-"C:/Users/harle/OneDrive/Desktop/IMRP 2024 Improved  War Census/Morgan vs Tattaglia Main War Files/barzini vs paterno/paterno vs barzini main file.xlsx" # data link
 IMRP_Data <- read_xlsx(Data_Location, 3) ### Load in data
 
 
 #### Killer Data Analytics
 
 IMRP_Data_Cleaned_Kills <- IMRP_Data |>
+  filter(`Team Kill` ==  FALSE)|>
   select (`Killer Name`, `Killed Name`, Reason, `Date Killed`, `Team Kill`,`Date Killed`, `Killer Faction Id`)|> # Reducing size of dataset to speed up process
   filter(`Team Kill` == FALSE)|>
   mutate(DATE = as.Date(`Date Killed`), format = "%d/%m/%Y")|>
-  group_by(`Killer Name`, `Killer Faction Id`, `DATE`)|>
+  group_by(`Killer Name`, `Killer Faction Id`)|>
   summarise(count=n(), .groups = 'drop')|>
   rename('Player Name' =`Killer Name` )|>
   rename('Faction' =`Killer Faction Id` )|>
@@ -32,7 +33,7 @@ IMRP_Data_Cleaned_Deaths <- IMRP_Data |>
   select (`Killer Name`, `Killed Name`, Reason, `Date Killed`, `Team Kill`,`Date Killed`, `Killed Faction Id`)|> # Reducing size of dataset to speed up process
   filter(`Team Kill` == FALSE)|>
   mutate(DATE = as.Date(`Date Killed`), format = "%d/%m/%Y")|>
-  group_by(`Killed Name`, `Killed Faction Id`, `DATE`)|>
+  group_by(`Killed Name`, `Killed Faction Id`)|>
   summarise(count=n(), .groups = 'drop')|>
   rename('Player Name' =`Killed Name` ) |>
   rename('Deaths' = count)|>
@@ -42,5 +43,5 @@ IMRP_Data_Cleaned_Deaths <- IMRP_Data |>
   
  Merged <- merge(IMRP_Data_Cleaned_Deaths, IMRP_Data_Cleaned_Kills)
  
-write.csv(Merged,"C:/Users/harle/OneDrive/Desktop/IMRP 2024 Improved  War Census/Morgan vs Tattaglia Main War Files/last update/KD.csv")
+write.csv(Merged,"C:/Users/harle/OneDrive/Desktop/IMRP 2024 Improved  War Census/Morgan vs Tattaglia Main War Files/barzini vs paterno/KD.csv")
 
