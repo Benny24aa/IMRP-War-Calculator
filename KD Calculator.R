@@ -11,7 +11,7 @@ library(janitor)
 library(stringr)
 library(readr)
 
-Data_Location <-"C:/Users/harle/OneDrive/Desktop/IMRP 2024 Improved  War Census/Morgan vs Tattaglia Main War Files/barzini vs paterno/paterno vs barzini main file.xlsx" # data link
+Data_Location <-"C:/Users/harle/OneDrive/Desktop/IMRP 2024 Improved  War Census/Morgan vs Tattaglia Main War Files/barzini vs paterno/paterno vs barzini main file current.xlsx" # data link
 IMRP_Data <- read_xlsx(Data_Location, 3) ### Load in data
 
 
@@ -43,3 +43,4 @@ IMRP_Data_Cleaned_Deaths <- IMRP_Data |>
  
 write.csv(Merged,"C:/Users/harle/OneDrive/Desktop/IMRP 2024 Improved  War Census/Morgan vs Tattaglia Main War Files/barzini vs paterno/KD.csv")
 
+### damage analytics
