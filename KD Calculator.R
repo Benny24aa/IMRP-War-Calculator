@@ -41,7 +41,7 @@ IMRP_Data_Cleaned_Deaths <- IMRP_Data |>
   
  Merged <- merge(IMRP_Data_Cleaned_Deaths, IMRP_Data_Cleaned_Kills)
  
- Merged_Final <- Merged |>
-   mutate(Ratio = Kills/Deaths)
-write.csv(Merged_Final,"C:/Users/harle/OneDrive/Desktop/IMRP 2024 Improved  War Census/Morgan vs Tattaglia Main War Files/barzini vs paterno/KD.csv", row.names = F)
+ # Merged_Final <- Merged |>
+ #   mutate(Ratio = Kills/Deaths)
+write.csv(Merged,"C:/Users/harle/OneDrive/Desktop/IMRP 2024 Improved  War Census/Morgan vs Tattaglia Main War Files/barzini vs paterno/KD.csv", row.names = F)
 ### damage analytics
