@@ -18,21 +18,21 @@ IMRP_Data <- read_xlsx(Data_Location, 3) ### Load in data
 
 IMRP_Data_Cleaned_Kills <- IMRP_Data |>
   filter(`Team Kill` ==  FALSE)|>
-  select (`Killer Name`, `Killer Id`,`Killed Id`,`Killed Name`, Reason, `Date Killed`, `Team Kill`,`Date Killed`, `Killer Faction Id`)|> # Reducing size of dataset to speed up process
+  select (`Killer Name`, `Killer Id`,`Killed Id`,`Killed Name`, Reason, `Date Killed`, `Team Kill`,`Date Killed`, `Killer Faction Id`, War)|> # Reducing size of dataset to speed up process
   mutate(DATE = as.Date(`Date Killed`), format = "%d/%m/%Y")|>
-  group_by(`Killer Id`)|>
+  group_by(`Killer Id`, War)|>
   summarise(count=n(), .groups = 'drop')|>
   rename('Player ID' = `Killer Id` )|>
   rename('Kills' = count)
 
 #### Killed Data Analytics
 IMRP_Data_Cleaned_Deaths <- IMRP_Data |>
-  select (`Killer Name`, `Killer Id`, `Killed Id`, `Killed Name`, Reason, `Date Killed`, `Team Kill`,`Date Killed`, `Killed Faction Id`)|> # Reducing size of dataset to speed up process
+  select (`Killer Name`, `Killer Id`, `Killed Id`, `Killed Name`, Reason, `Date Killed`, `Team Kill`,`Date Killed`, `Killed Faction Id`, War)|> # Reducing size of dataset to speed up process
   mutate(DATE = as.Date(`Date Killed`), format = "%d/%m/%Y")|>
-  group_by(`Killed Id`)|>
+  group_by(`Killed Id`,War)|>
   summarise(count=n(), .groups = 'drop')|>
   rename('Player ID' = `Killed Id` ) |>
-  rename('Deaths' = count)
+  rename('Deaths' = count) 
 
 #### Merging Data for Analytics
 
